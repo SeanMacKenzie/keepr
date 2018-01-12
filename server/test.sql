@@ -1,2 +1,2 @@
 -- ALTER TABLE keeps
--- ADD image VARCHAR(255)
+-- ADD shares int(11)
