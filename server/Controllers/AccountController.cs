@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Controllers
 {
+    [Route("[controller]")]
     public class AccountController : Controller
     {
         private readonly UserRepository _db;

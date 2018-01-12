@@ -18,7 +18,7 @@ namespace keepr.Repositories
             try
             {
                 int id = _db.ExecuteScalar<int>(@"
-                INSERT INTO user (Username, Email, Password)
+                INSERT INTO users (Username, Email, Password)
                 VALUES (@Username, @Email, @Password);
                 SELECT LAST_INSERT_ID();
                 ", creds);
