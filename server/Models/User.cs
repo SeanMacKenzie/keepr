@@ -9,9 +9,9 @@ namespace keepr.Models
 
         internal UserReturnModel GetReturnModel()
         {
-            return UserReturnModel() {
+            return new UserReturnModel() {
                 Id = Id,
-                UserName = Username,
+                Username = Username,
                 Email = Email
             };
         }

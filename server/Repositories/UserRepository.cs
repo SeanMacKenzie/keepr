@@ -37,7 +37,7 @@ namespace keepr.Repositories
             }
         }
 
-        public UserRepository Login(LoginUserModel creds)
+        public UserReturnModel Login(LoginUserModel creds)
         {
             User user = _db.QueryFirstOrDefault<User>(@"
             SELECT * FROM users WHERE email = @Email

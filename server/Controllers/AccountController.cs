@@ -37,7 +37,55 @@ namespace keepr.Controllers
         [HttpPost("login")]
         public async Task<UserReturnModel> Login([FromBody]LoginUserModel creds)
         {
-            
+            if (ModelState.IsValid)
+            {
+                UserReturnModel user = _db.Login(creds);
+                if (user != null)
+                {
+                    ClaimsPrincipal principal = user.SetClaims();
+                    await HttpContext.SignInAsync(principal);
+                    return user;
+                }
+            }
+            return null;
+        }
+
+        [HttpGet("authenicate")]
+        public UserReturnModel Authenticate()
+        {
+            var user = HttpContext.User;
+            var id = user.Identity.Name;
+            return _db.GetUserById(id);
+        }
+
+        [Authorize]
+        [HttpPut]
+        public UserReturnModel UpdateAccount([FromBody]UserReturnModel user)
+        {
+            var email = HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Email).Select(c => c.Value).SingleOrDefault();
+            var sessionUser = _db.GetUserByEmail(email);
+
+            if (sessionUser.Id == user.Id)
+            {
+                return _db.UpdateUser(user);
+            }
+            return null;
+        }
+
+        [Authorize]
+        [HttpPut("change-password")]
+        public string ChangePassword([FromBody]ChangeUserPasswordModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                var email = HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Email).Select(c => c.Value).SingleOrDefault();
+                var sessionUser = _db.GetUserByEmail(email);
+                if (sessionUser.Id == user.Id)
+                {
+                    return _db.ChangeUserPassword(user);
+                }
+            }
+            return "How you do what you do?";
         }
 
     }
