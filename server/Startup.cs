@@ -17,18 +17,53 @@ namespace keepr
 {
     public class Startup
     {
-        public IConfiguration Configuration {get;}
-        private readonly string _connectionString = "";
+        public IConfiguration Configuration { get; }
+        private readonly string _connectionString;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             _connectionString = configuration.GetSection("DB").GetValue<string>("MySQLConnectionString");
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = "/Account/Login/";
+                options.Events.OnRedirectToLogin = (context) =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsDevPolicy", builder =>
+                {
+                    builder
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+                });
+            });
+
             services.AddMvc();
+            services.AddTransient<IDbConnection>(x => CreateDbContext());
+            services.AddTransient<UserRepository>();
+            services.AddTransient<VaultRepository>();
+            services.AddTransient<VaultkeepRepository>();
+            services.AddTransient<KeepRepository>();
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+      
+        private IDbConnection CreateDbContext()
+        {
+            var connection = new MySqlConnection(_connectionString);
+            connection.Open();
+            return connection;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,8 +72,13 @@ namespace keepr
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors("CorsDevPolicy");
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            app.UseAuthentication();
             app.UseMvc();
         }
     }
