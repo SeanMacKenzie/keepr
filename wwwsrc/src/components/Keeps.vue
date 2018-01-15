@@ -7,13 +7,7 @@
         name: 'Keeps',
         data() {
             return {
-                newKeep: {
-                    name: '',
-                    description: '',
-                    image: '',
-                    shares: '',
-                    userId: ''
-                }
+                
             }
 
         },
@@ -30,17 +24,7 @@
 
         },
         methods: {
-            createKeep() {
-                this.newKeep.userId = this.user._id
-                this.$store.dispatch('createKeep', this.newKeep)
-                this.newKeep = {
-                    name: '',
-                    description: '',
-                    image: '',
-                    shares: '',
-                    userId: ''
-                }
-            },
+            
             removeKeep() {
                 this.$store.dispatch('removeKeep', keep)
             }
