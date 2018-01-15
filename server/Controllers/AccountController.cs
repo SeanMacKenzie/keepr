@@ -59,6 +59,11 @@ namespace keepr.Controllers
             return _db.GetUserById(id);
         }
 
+        public async void Logout()
+        {
+            await HttpContext.SignOutAsync();
+        }
+
         [Authorize]
         [HttpPut]
         public UserReturnModel UpdateAccount([FromBody]UserReturnModel user)
