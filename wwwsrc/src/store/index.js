@@ -32,6 +32,9 @@ var store = new vuex.Store({
     mutations: {
         setUser(state, user) {
             state.user = user
+        },
+        handleError(state, err) {
+            state.error = err
         }
 
     },
@@ -46,8 +49,29 @@ var store = new vuex.Store({
                 .catch(() => {
                     router.push({ name: 'Main' })
                 })
-        }
+        },
 
+        submitLogin({ commit, dispatch }) {
+            auth.post('account/login', user)
+                .then(res => {
+                    commit('setUser', res.data.data)
+                    router.push({ name: 'Main' })
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+
+        submitRegister({ commit, dispatch }, newUser) {
+            auth.post('account/register', newUser)
+                .then(res => {
+                    commit('setUser', res.data.data)
+                    router.push({ name: 'Main' })
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        }
     }
 })
 

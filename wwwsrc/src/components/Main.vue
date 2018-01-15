@@ -1,91 +1,131 @@
 <template>
-  <div class="main container-fluid">
-    <div class="row banner">
-      <div class="col-sm-3">
-        <h4>keepr.</h4>
-      </div>
-      <div class="col-sm-6 text-center">
-        <h2>hey mang</h2>
-      </div>
-      <div class="col-sm-3" id="login">
-        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#loginModal">Login</button>
-        <div class="modal fade login" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" data-backdrop="false" aria-hidden="true">&times;</button>
-              <h4 style="color:black;">Login</h4>
+    <div class="main container-fluid">
+        <div class="row banner">
+            <div class="col-sm-3 product">
+                <h4>keepr.</h4>
             </div>
-            <div class="modal-body">
-              <div class="form" id="login" @submit.prevent="submitLogin">
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input class="form-control" type="email" name="email" placeholder="you@email.com" v-model='login.email' required>
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input class="form-control" type="password" name="password" placeholder="password" v-model='login.password' required>
-                </div>
-                <div class="form-group">
-                  <button type="submit">Login</button>
-                </div>
-              </div>
+            <div class="col-sm-6 text-center welcome">
+                <h2>hey mang</h2>
             </div>
-          </div>
+            <div class="col-sm-3 login" id="login">
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">Login</button>
+                <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="loginModal">Login</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form" id="login" @submit.prevent="submitLogin">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input class="form-control" type="email" name="email" placeholder="yourname@email.com" v-model='login.email' required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input class="form-control" type="password" name="password" placeholder="password" v-model='login.password' required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-success pull-left" data-dismiss="modal" data-target="#loginModal">
+                                    <span class="glyphicon glyphicon-remove"></span>Cancel</button>
+                                <p>Need to register?
+                                    <button type="button" class="btn btn-default" @click="changeUp">Sign Up</button>
+                                </p>
+                                <div id="reg">
+                                    <form class="form" id="registration" @submit.prevent="submitRegister">
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control" name="username" placeholder="Name" v-model='register.name' required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" name="email" placeholder="yourname@email.com" v-model='register.email' required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" name="password" placeholder="password" v-model='register.password' required>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit">Register</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
-    <h1>the beginning of my vue project</h1>
 
-  </div>
 </template>
 
 <script>
-  export default {
-    name: 'Main',
-    data() {
-      return {
-        login: {
-          email: '',
-          password: ''
-        },
-        register: {
-          username: '',
-          email: '',
-          password: ''
-        }
+    export default {
+        name: 'Main',
+        data() {
+            return {
+                login: {
+                    email: '',
+                    password: ''
+                },
+                register: {
+                    username: '',
+                    email: '',
+                    password: ''
+                }
 
-      }
-    },
-    methods: {
-      submitLogin() {
-        this.$store.dispatch('submitLogin', this.login)
-        this.login= {
-          email: '',
-          password: ''
+            }
+        },
+        methods: {
+            submitLogin() {
+                this.$store.dispatch('submitLogin', this.login)
+                this.login = {
+                    email: '',
+                    password: ''
+                }
+            },
+            submitRegister() {
+                this.$store.dispatch('submitRegister', this.register)
+                this.register = {
+                    username: '',
+                    email: '',
+                    password: ''
+                }
+            },
+            changeUp(){
+                var x = document.getElementById('reg');
+                if (x.style.display === 'block') {
+                    x.style.display = 'none';
+                } else {
+                    x.style.display = 'block';
+                }
+            }
+        },
+        computed: {
+            error() {
+                return this.$store.state.error.message
+            }
         }
-      },
-      submitRegister() {
-        this.$store.dispatch('submitRegister', this.register)
-        this.register = {
-          username: '',
-          email: '',
-          password: ''
-        }
-      }
-    },
-    computed: {
-      error() {
-        return this.$store.state.error.message
-      }
     }
-  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  .banner {
-    background-color: black;
+    .banner {
+        background-color: black;
 
-  }
+    }
+    #reg {
+        display: none;
+    }
 </style>
