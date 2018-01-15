@@ -11,3 +11,5 @@
 -- SELECT LAST_INSERT_ID();
 
 -- DELETE FROM users WHERE id = 1
+
+-- DELETE FROM keeps WHERE id = 2

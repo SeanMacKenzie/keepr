@@ -40,10 +40,12 @@ var store = new vuex.Store({
     },
     actions: {
         // will need to change router push location
-        authenicate({ commit, dispatch }) {
+        authenticate({ commit, dispatch }) {
             auth('account/authenticate', )
                 .then(res => {
-                    commit('setUsers', res.data.data)
+
+                    console.log("Itdo auth", res.data)
+                    commit('setUser', res.data)
                     router.push({ name: 'Main' })
                 })
                 .catch(() => {
@@ -51,9 +53,10 @@ var store = new vuex.Store({
                 })
         },
 
-        submitLogin({ commit, dispatch }) {
+        submitLogin({ commit, dispatch }, user) {
             auth.post('account/login', user)
                 .then(res => {
+                    console.log("Itdo login", res.data)
                     commit('setUser', res.data.data)
                     router.push({ name: 'Main' })
                 })
@@ -66,6 +69,16 @@ var store = new vuex.Store({
             auth.post('account/register', newUser)
                 .then(res => {
                     commit('setUser', res.data.data)
+                    router.push({ name: 'Main' })
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+
+        logout({ commit, dispatch }) {
+            auth.delete('account')
+                .then(res => {
                     router.push({ name: 'Main' })
                 })
                 .catch(err => {

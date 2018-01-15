@@ -4,10 +4,14 @@
             <div class="col-sm-3 product">
                 <h4>keepr.</h4>
             </div>
-            <div class="col-sm-6 text-center welcome">
-                <h2>hey mang</h2>
+            <div class="col-sm-6 text-center welcome" v-if="user.username != null">
+                <h2>Welcome {{user.username}}</h2>
+
             </div>
-            <div class="col-sm-3 login" id="login">
+            <div class="col-sm-6 text-center welcome" v-else>
+                <h2>Welcome to keepr.</h2>
+            </div>
+            <div class="col-sm-3 login" id="login" v-if="user.username == null">
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">Login</button>
                 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
                     <div class="modal-dialog">
@@ -63,6 +67,9 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-3 logout" v-else>
+                <button type="button" class="btn btn-lg btn-danger" @click="logout">Logout</button>
+            </div>
         </div>
     </div>
 
@@ -109,11 +116,17 @@
                 } else {
                     x.style.display = 'block';
                 }
+            },
+            logout() {
+                this.$store.dispatch('logout')
             }
         },
         computed: {
             error() {
                 return this.$store.state.error.message
+            },
+            user() {
+                return this.$store.state.user
             }
         }
     }

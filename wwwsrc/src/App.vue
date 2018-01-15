@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <error></error>
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import Error from './components/Error'
+  import Error from '@/components/Error'
   export default {
     name: 'app',
     data() {

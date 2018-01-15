@@ -58,15 +58,23 @@ namespace keepr.Repositories
             User user = _db.QueryFirstOrDefault<User>(@"
             SELECT * FROM users WHERE email = @Email
             ", new { email });
-            return user.GetReturnModel();
+            if (user != null)
+            {
+                return user.GetReturnModel();
+            }
+            return null;
         }
 
         internal UserReturnModel GetUserById(string id)
         {
-            User savedUser = _db.QueryFirstOrDefault<User>(@"
+            User user = _db.QueryFirstOrDefault<User>(@"
             SELECT * FROM users WHERE id = @id 
             ", new { id });
-            return savedUser.GetReturnModel();
+            if (user != null)
+            {
+                return user.GetReturnModel();
+            }
+            return null;
         }
 
         internal UserReturnModel UpdateUser(UserReturnModel user)

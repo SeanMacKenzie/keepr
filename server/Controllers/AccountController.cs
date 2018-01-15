@@ -51,7 +51,7 @@ namespace keepr.Controllers
             return null;
         }
 
-        [HttpGet("authenicate")]
+        [HttpGet("authenticate")]
         public UserReturnModel Authenticate()
         {
             var user = HttpContext.User;
