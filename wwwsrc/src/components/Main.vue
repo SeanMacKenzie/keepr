@@ -13,7 +13,7 @@
             </div>
             <div class="col-sm-3 login" id="login" v-if="user.username == null">
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">Login</button>
-                <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+                <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -33,7 +33,7 @@
                                         <input class="form-control" type="password" name="password" placeholder="password" v-model='login.password' required>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit">Login</button>
+                                        <button type="submit" class="btn btn-default btn-success" data-toggle="modal" data-backdrop="false">Login</button>
                                     </div>
                                 </form>
                             </div>
@@ -58,7 +58,7 @@
                                             <input type="password" class="form-control" name="password" placeholder="password" v-model='register.password' required>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit">Register</button>
+                                            <button type="submit" class="btn btn-default btn-success" data-toggle="modal" data-backdrop="false">Register</button>
                                         </div>
                                     </form>
                                 </div>
@@ -70,6 +70,12 @@
             <div class="col-sm-3 logout" v-else>
                 <button type="button" class="btn btn-lg btn-danger" @click="logout">Logout</button>
             </div>
+        </div>
+        <div class="row navigation" v-if="user.username != null">
+            <button class="btn btn-lg btn-success">
+                <router-link :to="'Vaults'">Visit your vaults</router-link>
+            </button>
+
         </div>
     </div>
 
@@ -109,7 +115,7 @@
                     password: ''
                 }
             },
-            changeUp(){
+            changeUp() {
                 var x = document.getElementById('reg');
                 if (x.style.display === 'block') {
                     x.style.display = 'none';
@@ -136,9 +142,15 @@
 <style>
     .banner {
         background-color: black;
+        vertical-align: bottom;
 
     }
+
     #reg {
         display: none;
+    }
+
+    .product {
+        vertical-align: bottom;
     }
 </style>

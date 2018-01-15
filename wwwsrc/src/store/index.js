@@ -26,6 +26,7 @@ var store = new vuex.Store({
         keeps: [],
         activekeep: {},
         vaults: [],
+        activevault: {},
         vaultkeep: {}
 
     },
@@ -35,11 +36,20 @@ var store = new vuex.Store({
         },
         handleError(state, err) {
             state.error = err
+        },
+        setKeeps(state, data) {
+            state.keeps = data
+        },
+        setActiveKeep(state, data) {
+            state.activekeep = data
+        },
+        setActiveVault(state, data) {
+            state.activeVault = data
         }
 
     },
     actions: {
-        // will need to change router push location
+        //Auth functions
         authenticate({ commit, dispatch }) {
             auth('account/authenticate', )
                 .then(res => {
@@ -52,19 +62,18 @@ var store = new vuex.Store({
                     router.push({ name: 'Main' })
                 })
         },
-
         submitLogin({ commit, dispatch }, user) {
             auth.post('account/login', user)
                 .then(res => {
                     console.log("Itdo login", res.data)
-                    commit('setUser', res.data.data)
+                    commit('setUser', res.data)
                     router.push({ name: 'Main' })
                 })
                 .catch(err => {
                     commit('handleError', err)
                 })
+            $('#loginModal').modal('hide')
         },
-
         submitRegister({ commit, dispatch }, newUser) {
             auth.post('account/register', newUser)
                 .then(res => {
@@ -74,12 +83,52 @@ var store = new vuex.Store({
                 .catch(err => {
                     commit('handleError', err)
                 })
+            $('#loginModal').modal('hide')
         },
-
         logout({ commit, dispatch }) {
             auth.delete('account')
                 .then(res => {
+                    commit('setUser', {})
                     router.push({ name: 'Main' })
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+
+        //Keeps functions
+        getKeeps({ commit, dispatch }) {
+            api('keeps')
+                .then(res => {
+                    console.log("getKeeps", res.data.data)
+                    commit('setKeeps', res.data.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+        getKeep({ commit, dispatch }, id) {
+            api('keeps/' + id)
+                .then(res => {
+                    commit('setActiveKeep', res.data.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+        createKeep({ commit, dispatch }, newKeep) {
+            api.post('keeps/', newKeep)
+                .then(res => {
+                    dispatch('getKeeps')
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+        removeKeep({ commit, dispatch }, keep) {
+            api.delete('keeps/' + keep._id)
+                .then(res => {
+                    dispatch('getKeeps')
                 })
                 .catch(err => {
                     commit('handleError', err)

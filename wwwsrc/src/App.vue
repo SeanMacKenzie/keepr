@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import Error from '@/components/Error'
+  import Error from './components/Error'
   export default {
     name: 'app',
     data() {
@@ -17,6 +17,9 @@
     mounted() {
       //dispatch authenticate
       this.$store.dispatch('authenticate')
+    },
+    components: {
+      Error
     }
   }
 </script>
