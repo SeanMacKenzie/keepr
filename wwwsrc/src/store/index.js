@@ -21,12 +21,32 @@ vue.use(vuex)
 
 var store = new vuex.Store({
     state: {
+        user: {},
+        error: {},
+        keeps: [],
+        activekeep: {},
+        vaults: [],
+        vaultkeep: {}
 
     },
     mutations: {
+        setUser(state, user) {
+            state.user = user
+        }
 
     },
     actions: {
+        // will need to change router push location
+        authenicate({ commit, dispatch }) {
+            auth('account/authenticate', )
+                .then(res => {
+                    commit('setUsers', res.data.data)
+                    router.push({ name: 'Main' })
+                })
+                .catch(() => {
+                    router.push({ name: 'Main' })
+                })
+        }
 
     }
 })

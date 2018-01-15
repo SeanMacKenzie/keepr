@@ -9,3 +9,5 @@
 -- INSERT INTO users (Username, Email, Password)
 -- VALUES ("testguy", "tester@test.com", "tester");
 -- SELECT LAST_INSERT_ID();
+
+-- DELETE FROM users WHERE id = 1
