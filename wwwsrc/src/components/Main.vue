@@ -47,7 +47,7 @@
                                     <form class="form" id="registration" @submit.prevent="submitRegister">
                                         <div class="form-group">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" name="username" placeholder="Name" v-model='register.name' required>
+                                            <input type="text" class="form-control" name="username" placeholder="Name" v-model='register.username' required>
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
@@ -72,12 +72,12 @@
             </div>
         </div>
         <div class="row navigation" v-if="user.username != null">
-            <div class="col-md-6 text-center">
+            <div class="col-md-12 text-center">
                 <button class="btn btn-lg btn-success">
-                    <router-link :to="'Dashboard'">Manage your Vaults</router-link>
+                    <router-link :to="'Dashboard'">Visit Dashboard</router-link>
                 </button>
             </div>
-            <div class="col-md-6 text-center">
+            <!-- <div class="col-md-6 text-center">
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createKeepModal">Create a new Keep</button>
                 <div class="modal fade" id="createKeepModal" tabindex="-1" role="dialog" aria-labelledby="createKeepModalLabel">
                     <div class="modal-dialog">
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-            </div>           
+            </div>            -->
         </div>
         <keeps></keeps>
 
@@ -139,13 +139,6 @@
                     email: '',
                     password: ''
                 },
-                newKeep: {
-                    name: '',
-                    description: '',
-                    image: '',
-                    shares: '',
-                    userId: ''
-                }
 
             }
         },
@@ -185,18 +178,7 @@
                 this.$store.dispatch('logout')
             },
 
-            createKeep() {
-                this.newKeep.shares = 0
-                this.newKeep.userId = this.user.id
-                this.$store.dispatch('createKeep', this.newKeep)
-                this.newKeep = {
-                    name: '',
-                    description: '',
-                    image: '',
-                    shares: '',
-                    userId: ''
-                }
-            },
+            
         },
         components: {
             Keeps

@@ -24,6 +24,11 @@ namespace keepr.Repositories
             return _db.QueryFirstOrDefault<Vault>($"SELECT * FROM vaults WHERE id = {id}");
         }
 
+        public Vault GetByUser(int id)
+        {
+            return _db.QueryFirstOrDefault<Vault>($"SELECT * FROM vaults WHERE userid = {id}");
+        }
+
         public Vault Add(Vault vault)
         {
             int id = _db.ExecuteScalar<int>(@"INSERT INTO vaults (Name, Description, UserId)

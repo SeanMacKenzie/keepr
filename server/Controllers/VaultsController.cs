@@ -29,6 +29,12 @@ namespace keepr.Controllers
             return _db.GetById(id);
         }
 
+        [HttpGet("{id}")]
+        public Vault GetByUser(int id)
+        {
+            return _db.GetByUser(id);
+        }
+
         [HttpPost]
         public Vault Post([FromBody]Vault vault)
         {

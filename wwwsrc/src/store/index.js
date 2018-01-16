@@ -80,7 +80,7 @@ var store = new vuex.Store({
         submitRegister({ commit, dispatch }, newUser) {
             auth.post('account/register', newUser)
                 .then(res => {
-                    commit('setUser', res.data.data)
+                    commit('setUser', res.data)
                     router.push({ name: 'Main' })
                 })
                 .catch(err => {
@@ -113,6 +113,7 @@ var store = new vuex.Store({
         getKeep({ commit, dispatch }, id) {
             api('keeps/' + id)
                 .then(res => {
+                    console.log("getKeep", res.data)
                     commit('setActiveKeep', res.data)
                 })
                 .catch(err => {
@@ -180,7 +181,12 @@ var store = new vuex.Store({
                 .catch(err => {
                     commit('handleError', err)
                 })
-        }
+        },
+
+        //Vaults functions
+        // getVaults({commit, dispatch}, payload) {
+        //     api('vaults/' + payload.)
+        // }
     }
 })
 
