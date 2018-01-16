@@ -45,6 +45,9 @@ var store = new vuex.Store({
         },
         setActiveVault(state, data) {
             state.activeVault = data
+        },
+        setVaults(state, data) {
+            state.vaults = data
         }
 
     },
@@ -100,8 +103,8 @@ var store = new vuex.Store({
         getKeeps({ commit, dispatch }) {
             api('keeps')
                 .then(res => {
-                    console.log("getKeeps", res.data.data)
-                    commit('setKeeps', res.data.data)
+                    console.log("getKeeps", res.data)
+                    commit('setKeeps', res.data)
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -110,7 +113,7 @@ var store = new vuex.Store({
         getKeep({ commit, dispatch }, id) {
             api('keeps/' + id)
                 .then(res => {
-                    commit('setActiveKeep', res.data.data)
+                    commit('setActiveKeep', res.data)
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -118,6 +121,7 @@ var store = new vuex.Store({
         },
         createKeep({ commit, dispatch }, newKeep) {
             api.post('keeps/', newKeep)
+
                 .then(res => {
                     dispatch('getKeeps')
                 })
@@ -126,10 +130,52 @@ var store = new vuex.Store({
                 })
             $('#createKeepModal').modal('hide')
         },
+        //this needs a check to make sure the creator is the only one who can delete
         removeKeep({ commit, dispatch }, keep) {
-            api.delete('keeps/' + keep._id)
+            api.delete('keeps/' + keep.id)
                 .then(res => {
                     dispatch('getKeeps')
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+
+        //Vault functions
+        getVaults({ commit, dispatch }) {
+            api('vaults')
+                .then(res => {
+                    console.log("getVaults", res.data)
+                    commit('setVaults', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+        getVault({commit, dispatch}, id) {
+            api('vaults/' + id)
+                .then(res => {
+                    commit('setActiveKeep', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+        createVault({ commit, dispatch }, newVault) {
+            api.post('vaults/', newVault)
+                .then(res => {
+                    dispatch('getVaults')
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+            $('#createVaultModal').modal('hide')
+        },
+        //this needs a check to make sure the creator is the only one who can delete
+        removeVault({commit, dispatch}, vault) {
+            api.delete('vaults/' + vault.id)
+                .then(res => {
+                    dispatch('getVaults')
                 })
                 .catch(err => {
                     commit('handleError', err)

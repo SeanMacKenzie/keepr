@@ -32,7 +32,11 @@ namespace keepr.Controllers
         [HttpPost]
         public Vault Post([FromBody]Vault vault)
         {
-            return _db.Add(vault);
+            if (ModelState.IsValid)
+            {
+                return _db.Add(vault);
+            }
+            return null;
         }
 
         [HttpPut("{id}")]

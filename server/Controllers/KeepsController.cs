@@ -32,7 +32,7 @@ namespace keepr.Controllers
         [HttpPost]
         public Keep Post([FromBody]Keep keep)
         {
-            if(ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 return _db.Add(keep);
             }

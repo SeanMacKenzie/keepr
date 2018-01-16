@@ -115,14 +115,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>           
         </div>
+        <keeps></keeps>
+
     </div>
 
 
 </template>
 
 <script>
+    import Keeps from '@/components/Keeps'
     export default {
         name: 'Main',
         data() {
@@ -144,6 +147,14 @@
                     userId: ''
                 }
 
+            }
+        },
+        computed: {
+            error() {
+                return this.$store.state.error.message
+            },
+            user() {
+                return this.$store.state.user
             }
         },
         methods: {
@@ -175,7 +186,8 @@
             },
 
             createKeep() {
-                this.newKeep.userId = this.user._id
+                this.newKeep.shares = 0
+                this.newKeep.userId = this.user.id
                 this.$store.dispatch('createKeep', this.newKeep)
                 this.newKeep = {
                     name: '',
@@ -186,14 +198,10 @@
                 }
             },
         },
-        computed: {
-            error() {
-                return this.$store.state.error.message
-            },
-            user() {
-                return this.$store.state.user
-            }
+        components: {
+            Keeps
         }
+        
     }
 </script>
 
