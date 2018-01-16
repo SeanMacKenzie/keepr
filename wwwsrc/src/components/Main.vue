@@ -74,7 +74,7 @@
         <div class="row navigation" v-if="user.username != null">
             <div class="col-md-6 text-center">
                 <button class="btn btn-lg btn-success">
-                    <router-link :to="'Vaults'">Visit your vaults</router-link>
+                    <router-link :to="'Dashboard'">Manage your Vaults</router-link>
                 </button>
             </div>
             <div class="col-md-6 text-center">
@@ -108,7 +108,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-default btn-success pull-left" data-dismiss="modal" data-target="createKeepModal">
+                                <button type="submit" class="btn btn-default btn-success center" data-dismiss="modal" data-target="createKeepModal">
                                     <span class="glyphicon glyphicon-remove"></span>Cancel
                                 </button>
                             </div>

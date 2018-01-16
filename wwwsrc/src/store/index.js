@@ -124,6 +124,7 @@ var store = new vuex.Store({
                 .catch(err => {
                     commit('handleError', err)
                 })
+            $('#createKeepModal').modal('hide')
         },
         removeKeep({ commit, dispatch }, keep) {
             api.delete('keeps/' + keep._id)
