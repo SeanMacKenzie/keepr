@@ -122,7 +122,7 @@
                     description: '',
                     image: '',
                     shares: '',
-                    view: '',
+                    views: '',
                     userId: ''
                 }
             }

@@ -1,7 +1,7 @@
 <template>
     <div class="main container-fluid">
         <div class="row banner">
-            <div class="col-sm-3 product">
+            <div class="col-sm-3 product bottom-align-text">
                 <h4>keepr.</h4>
             </div>
             <div class="col-sm-6 text-center welcome" v-if="user.username != null">
@@ -11,7 +11,7 @@
             <div class="col-sm-6 text-center welcome" v-else>
                 <h2>Welcome to keepr.</h2>
             </div>
-            <div class="col-sm-3 login" id="login" v-if="user.username == null">
+            <div class="col-sm-3 login bottom-align-text" id="login" v-if="user.username == null">
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">Login</button>
                 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
                     <div class="modal-dialog">
@@ -139,12 +139,12 @@
                 this.$store.dispatch('logout')
             },
 
-            
+
         },
         components: {
             Keeps
         }
-        
+
     }
 </script>
 
@@ -160,7 +160,6 @@
         display: none;
     }
 
-    .product {
-        vertical-align: bottom;
-    }
+
+    
 </style>

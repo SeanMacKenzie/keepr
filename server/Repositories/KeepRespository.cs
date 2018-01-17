@@ -40,6 +40,7 @@ namespace keepr.Repositories
                 keep.Description,
                 keep.Image,
                 keep.Shares,
+                keep.Views,
                 keep.UserId
             });
             keep.Id = id;
@@ -54,6 +55,7 @@ namespace keepr.Repositories
                     Description = @Description,
                     Image = @Image,
                     Shares = @Shares,
+                    Views = @Views,
                     UserId = @UserId
                 WHERE Id = {id};
                 SELECT * FROM keeps WHERE id = {id};", keep);

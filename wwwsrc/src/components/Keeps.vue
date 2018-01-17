@@ -20,7 +20,7 @@
             </div>
             <h6>{{keep.description}}</h6>
             <img :src="keep.image" width="150" height="150">
-            <h6>Currently in {{keep.shares}} vaults</h6>
+            <h6>Has been in {{keep.shares}} vaults</h6>
         </div>
         <div class="modal fade" id="loginKeepModal" tabindex="-1" role="dialog" aria-labelledby="loginKeepModalLabel">
             <div class="modal-dialog">
@@ -87,7 +87,7 @@
                     </div>
                     <div class="modal-body">
                         <img :src="activekeep.image" style="max-width: 100%">
-                        <form name="keepmover" class="form" @submit.prevent="moveKeep">
+                        <form name="keepmover" class="form" @submit.prevent="moveKeep(); incrementShares();">
                             <select class="select" v-model="vaultSelection.vaultId">
                                 <option disabled selected value="">Select Vault</option>
                                 <option v-for="vault in vaults" :value="vault.id">{{vault.name}}</option>
@@ -124,6 +124,15 @@
                     vaultId: '',
                     keepId: '',
                     userId: ''
+                },
+                updateKeep: {
+                    id: '',
+                    name: '',
+                    description: '',
+                    image: '',
+                    shares: '',
+                    view: '',
+                    userId: ''
                 }
 
             }
@@ -135,8 +144,8 @@
             },
             user() {
                 return this.$store.state.user
-                
-                
+
+
             },
             activekeep() {
                 return this.$store.state.activekeep
@@ -151,7 +160,7 @@
             this.$store.dispatch('getUserVaults', this.user.id)
         },
 
-        
+
         methods: {
 
             getKeep(id) {
@@ -192,6 +201,24 @@
             },
             getUserVaults() {
                 this.$store.dispatch('getUserVaults', this.user.id)
+            },
+            incrementShares() {
+                this.updateKeep.id = this.activekeep.id
+                this.updateKeep.name = this.activekeep.name
+                this.updateKeep.description = this.activekeep.description
+                this.updateKeep.image = this.activekeep.image
+                this.updateKeep.shares = this.activekeep.shares++
+                this.updateKeep.views = this.activekeep.views
+                this.updateKeep.userId = this.activekeep.userId
+                this.$store.dispatch('updateKeep', this.updateKeep)
+                this.updateKeep = {
+                    name: '',
+                    description: '',
+                    image: '',
+                    shares: '',
+                    view: '',
+                    userId: ''
+                }
             }
         }
     }

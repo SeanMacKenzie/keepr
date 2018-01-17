@@ -44,7 +44,7 @@ var store = new vuex.Store({
             state.activekeep = data
         },
         setActiveVault(state, data) {
-            state.activeVault = data
+            state.activevault = data
         },
         setVaults(state, data) {
             state.vaults = data
@@ -52,7 +52,7 @@ var store = new vuex.Store({
         setVaultKeeps(state, data) {
             state.vaultkeeps = data
         }
-        
+
 
     },
     actions: {
@@ -81,7 +81,7 @@ var store = new vuex.Store({
                 })
             $('#loginModal').modal('hide')
         },
-        submitKeepLogin({ commit, dispatch }, newUser) {
+        submitKeepLogin({ commit, dispatch }, user) {
             auth.post('account/login', user)
                 .then(res => {
                     console.log("Itdo login", res.data)
@@ -130,7 +130,7 @@ var store = new vuex.Store({
         getKeeps({ commit, dispatch }) {
             api('keeps')
                 .then(res => {
-                    console.log("getKeeps", res.data)
+                    // console.log("getKeeps", res.data)
                     commit('setKeeps', res.data)
                 })
                 .catch(err => {
@@ -169,6 +169,16 @@ var store = new vuex.Store({
                 })
             $('#createKeepModal').modal('hide')
         },
+        updateKeep({ commit, dispatch }, updateKeep) {
+            console.log(updateKeep)
+            api.put('keeps/' + updateKeep.id, updateKeep)
+                .then(res => {
+                    commit('setActiveKeep', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
         //this needs a check to make sure the creator is the only one who can delete
         removeKeep({ commit, dispatch }, payload) {
             api.delete('keeps/' + payload.keepId)
@@ -184,10 +194,9 @@ var store = new vuex.Store({
 
         //Vault functions
         getUserVaults({ commit, dispatch }, userid) {
-            console.log(userid)
             api('vaults/user/' + userid)
                 .then(res => {
-                    console.log("getUserVaults", res.data)
+                    // console.log("getUserVaults", res.data)
                     commit('setVaults', res.data)
                 })
                 .catch(err => {
@@ -198,7 +207,9 @@ var store = new vuex.Store({
             api('vaults/' + id)
                 .then(res => {
                     console.log("getVault", res.data)
-                    commit('setActiveKeep', res.data)
+                    commit('setActiveVault', res.data)
+                    dispatch('getVaultKeeps', id)
+
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -207,7 +218,7 @@ var store = new vuex.Store({
         createVault({ commit, dispatch }, newVault) {
             api.post('vaults/', newVault)
                 .then(res => {
-                    dispatch('getVaults')
+                    dispatch('getUserVaults', newVault.userId)
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -215,10 +226,12 @@ var store = new vuex.Store({
             $('#createVaultModal').modal('hide')
         },
         //this needs a check to make sure the creator is the only one who can delete
-        removeVault({ commit, dispatch }, vault) {
-            api.delete('vaults/' + vault.id)
+        removeVault({ commit, dispatch }, vaultId) {
+            console.log(vaultId)
+            api.delete('vaults/' + vaultId)
                 .then(res => {
-                    dispatch('getVaults')
+                    // commit('getVaults')
+                    router.push({ name: 'Dashboard' })
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -227,7 +240,8 @@ var store = new vuex.Store({
 
         //Vaultkeeps
         getVaultKeeps({ commit, dispatch }, vaultId) {
-            api('vaultkeeps/' + vaultId)
+            console.log(vaultId)
+            api('vaultkeeps/vault/' + vaultId)
                 .then(res => {
                     console.log("getVaultKeeps", res.data)
                     commit('setVaultKeeps', res.data)
