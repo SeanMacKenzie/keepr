@@ -2,11 +2,12 @@
     <div class="row vaults text-center">
         <h1>Vaults yo!</h1>
         <div class="col-sm-6" v-for="vault in vaults">
-            <h3>{{vault.name}}</h3>
+            <router-link class="vault-title" :to="'Vaultkeeps'">
+                <h3><span @click="getVault(vault.id)">{{vault.name}}</span></h3>
+            </router-link>
             <p>{{vault.description}}</p>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -16,7 +17,7 @@
             return {
 
             }
-        }, 
+        },
         mounted() {
             this.$store.dispatch('getUserVaults', this.user.id)
         },
@@ -30,12 +31,24 @@
             user() {
                 return this.$store.state.user
             }
+        },
+        methods: {
+            getVault(id) {
+                this.$store.dispatch('getVault', id)
+            }
         }
-        
+
     }
 
 </script>
 
+
+
+
+
+
+
+
+
 <style>
-    
 </style>

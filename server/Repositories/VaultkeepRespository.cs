@@ -14,14 +14,14 @@ namespace keepr.Repositories
         {
         }
 
-        public IEnumerable<Vaultkeep> Getall()
-        {
-            return _db.Query<Vaultkeep>($"SELECT * FROM vaultkeeps");
-        }
+        // public IEnumerable<Vaultkeep> Getall()
+        // {
+        //     return _db.Query<Vaultkeep>($"SELECT * FROM vaultkeeps");
+        // }
 
-        public Vaultkeep GetById(int id)
+        public IEnumerable<Vaultkeep> GetByVault(int vaultid)
         {
-            return _db.QueryFirstOrDefault<Vaultkeep>($"SELECT * FROM vaultkeeps WHERE id = {id}");
+            return _db.Query<Vaultkeep>($"SELECT * FROM vaultkeeps vk INNER JOIN keeps k ON k.id = vk.keepId WHERE vaultId = {vaultid}");
         }
 
         public Vaultkeep Add(Vaultkeep vaultkeep)

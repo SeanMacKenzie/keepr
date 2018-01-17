@@ -23,13 +23,13 @@ namespace keepr.Controllers
         //     return _db.GetAll();
         // }
 
-        // [HttpGet("{id}")]
-        // public Vault Get(int id)
-        // {
-        //     return _db.GetById(id);
-        // }
+        [HttpGet("{id}")]
+        public Vault Get(int id)
+        {
+            return _db.GetById(id);
+        }
 
-        [HttpGet("{userid}")]
+       [HttpGet("user/{userid}")]
         public IEnumerable<Vault> GetByUser(int userid)
         {
             return _db.GetByUser(userid);

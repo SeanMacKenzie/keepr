@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row intro">
-            <h3>Hello {{user.username}}, this is where you can add keeps, manage you vaults, and be awesome.</h3>
+            <h3>Hello {{user.username}}. This is where you can add keeps, manage you vaults, and be awesome.</h3>
         </div>
         <div class="row navigation">
             <div class="col-md-4 add-vault text-center">

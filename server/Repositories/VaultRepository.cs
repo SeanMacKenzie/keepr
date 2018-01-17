@@ -14,10 +14,7 @@ namespace keepr.Repositories
         {
         }
 
-        // public IEnumerable<Vault> GetAll()
-        // {
-        //     return _db.Query<Vault>($"SELECT * FROM vaults");
-        // }
+       
 
         public Vault GetById(int id)
         {
