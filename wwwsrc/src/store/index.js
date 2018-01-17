@@ -48,7 +48,11 @@ var store = new vuex.Store({
         },
         setVaults(state, data) {
             state.vaults = data
+        },
+        setVaultKeeps(state, data) {
+            state.vaultkeeps = data
         }
+        
 
     },
     actions: {
@@ -76,6 +80,29 @@ var store = new vuex.Store({
                     commit('handleError', err)
                 })
             $('#loginModal').modal('hide')
+        },
+        submitKeepLogin({ commit, dispatch }, newUser) {
+            auth.post('account/login', user)
+                .then(res => {
+                    console.log("Itdo login", res.data)
+                    commit('setUser', res.data)
+                    router.push({ name: 'Main' })
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+            $('#loginKeepModal').modal('hide')
+        },
+        submitKeepRegister({ commit, dispatch }, newUser) {
+            auth.post('account/register', newUser)
+                .then(res => {
+                    commit('setUser', res.data)
+                    router.push({ name: 'Main' })
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+            $('#loginKeepModal').modal('hide')
         },
         submitRegister({ commit, dispatch }, newUser) {
             auth.post('account/register', newUser)
@@ -160,7 +187,7 @@ var store = new vuex.Store({
             console.log(userid)
             api('vaults/user/' + userid)
                 .then(res => {
-                    // console.log("getUserVaults", res.data)
+                    console.log("getUserVaults", res.data)
                     commit('setVaults', res.data)
                 })
                 .catch(err => {
@@ -200,7 +227,24 @@ var store = new vuex.Store({
 
         //Vaultkeeps
         getVaultKeeps({ commit, dispatch }, vaultId) {
-
+            api('vaultkeeps/' + vaultId)
+                .then(res => {
+                    console.log("getVaultKeeps", res.data)
+                    commit('setVaultKeeps', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+        addVaultKeep({ commit, dispatch }, vaultKeep) {
+            api.post('vaultkeeps/', vaultKeep)
+                .then(res => {
+                    console.log("addVaultKeeps", res.data)
+                    commit('setVaultKeeps', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
         }
     }
 })

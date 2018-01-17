@@ -29,11 +29,11 @@
             }
         },
         mounted() {
-            this.$store.dispatch('getVaultKeeps', this.activeVault.id)
+            this.$store.dispatch('getVaultKeeps', this.activevault.id)
         },
         computed: {
-            activeVault() {
-                return this.$store.state.activeVault
+            activevault() {
+                return this.$store.state.activevault
             },
             user() {
                 return this.$store.state.user

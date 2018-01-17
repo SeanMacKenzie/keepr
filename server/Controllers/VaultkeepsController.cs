@@ -23,5 +23,15 @@ namespace keepr.Controllers
             return _db.GetByVault(vaultid);
         }
 
+        [HttpPost]
+        public Vaultkeep Post([FromBody]Vaultkeep vaultkeep)
+        {
+            if (ModelState.IsValid)
+            {
+                return _db.Add(vaultkeep);
+            }
+            return null;
+        }
+
     }
 }
