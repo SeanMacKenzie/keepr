@@ -23,8 +23,8 @@
                     <div class="modal-body">
                         <img :src="activekeep.image" style="max-width: 100%">
                     </div>
-                    <div class="modal-footer">
-                        <h5>This is where we add to vault or share of something like that</h5>
+                    <div class="modal-footer text-center">
+                        <button type="button" class="btn-default btn-lg btn-danger delete" @click="removeKeep(activekeep)">Delete Keep</button>
                     </div>
                 </div>
             </div>
@@ -54,10 +54,24 @@
             activekeep() {
                 return this.$store.state.activekeep
             }
+        },
+        methods: {
+            getKeep(id) {
+                this.$store.dispatch('getKeep', id)
+            },
+            removeKeep(activekeep) {
+                var keepId = activekeep.id
+                var userId = activekeep.userId
+                this.$store.dispatch('removeKeep', { keepId, userId })
+            }
         }
     }
 
 </script>
 
 <style>
+    .delete {
+        display: flex;
+        justify-content: center;
+    }
 </style>

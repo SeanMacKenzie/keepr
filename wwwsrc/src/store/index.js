@@ -120,7 +120,7 @@ var store = new vuex.Store({
                     commit('handleError', err)
                 })
         },
-        getUserKeeps({commit, dispatch}, userid) {
+        getUserKeeps({ commit, dispatch }, userid) {
             api('keeps/user/' + userid)
                 .then(res => {
                     console.log("getUserKeeps", res.data)
@@ -131,10 +131,11 @@ var store = new vuex.Store({
                 })
         },
         createKeep({ commit, dispatch }, newKeep) {
+            console.log(newKeep)
             api.post('keeps/', newKeep)
-
                 .then(res => {
-                    dispatch('getKeeps')
+                    dispatch('getUserKeeps', newKeep.userId)
+                    // router.push({ name: 'Dashboard' })
                 })
                 .catch(err => {
                     commit('handleError', err)
@@ -142,15 +143,17 @@ var store = new vuex.Store({
             $('#createKeepModal').modal('hide')
         },
         //this needs a check to make sure the creator is the only one who can delete
-        removeKeep({ commit, dispatch }, keep) {
-            api.delete('keeps/' + keep.id)
+        removeKeep({ commit, dispatch }, payload) {
+            api.delete('keeps/' + payload.keepId)
                 .then(res => {
-                    dispatch('getKeeps')
+                    dispatch('getUserKeeps', payload.userId)
                 })
                 .catch(err => {
                     commit('handleError', err)
                 })
+            $('#selectedKeep').modal('hide')
         },
+
 
         //Vault functions
         getUserVaults({ commit, dispatch }, userid) {

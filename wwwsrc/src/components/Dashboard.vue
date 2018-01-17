@@ -122,6 +122,7 @@
                     description: '',
                     image: '',
                     shares: '',
+                    view: '',
                     userId: ''
                 }
             }
@@ -141,6 +142,7 @@
                 }
             },
             createKeep() {
+                this.newKeep.views = 0
                 this.newKeep.shares = 0
                 this.newKeep.userId = this.user.id
                 this.$store.dispatch('createKeep', this.newKeep)

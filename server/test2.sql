@@ -1,5 +1,5 @@
-ALTER TABLE keeps
-ADD views int(11)
+-- ALTER TABLE keeps
+-- ADD views INT(11) DEFAULT '0'
 
 -- SELECT * FROM vaults
 
@@ -10,7 +10,7 @@ ADD views int(11)
 -- VALUES ("testguy", "tester@test.com", "tester");
 -- SELECT LAST_INSERT_ID();
 
--- DELETE FROM users WHERE id = 1
+-- DELETE FROM keeps WHERE id = 11
 
 -- DELETE FROM vaults WHERE id = 1
 -- DELETE FROM users WHERE id = 3

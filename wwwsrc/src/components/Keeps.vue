@@ -61,9 +61,6 @@
         },
         methods: {
 
-            removeKeep() {
-                this.$store.dispatch('removeKeep', keep)
-            },
             getKeep(id) {
                 this.$store.dispatch('getKeep', id)
             }
