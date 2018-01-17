@@ -24,6 +24,11 @@ namespace keepr.Repositories
             return _db.QueryFirstOrDefault<Keep>($"SELECT * FROM keeps WHERE id = {id}");
         }
 
+        public IEnumerable<Keep> GetByUser(int userid)
+        {
+            return _db.Query<Keep>($"SELECT * FROM keeps WHERE userid = {userid}");
+        }
+
         public Keep Add(Keep keep)
         {
             

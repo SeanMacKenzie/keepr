@@ -14,19 +14,19 @@ namespace keepr.Repositories
         {
         }
 
-        public IEnumerable<Vault> GetAll()
-        {
-            return _db.Query<Vault>($"SELECT * FROM vaults");
-        }
+        // public IEnumerable<Vault> GetAll()
+        // {
+        //     return _db.Query<Vault>($"SELECT * FROM vaults");
+        // }
 
         public Vault GetById(int id)
         {
             return _db.QueryFirstOrDefault<Vault>($"SELECT * FROM vaults WHERE id = {id}");
         }
 
-        public Vault GetByUser(int id)
+        public IEnumerable<Vault> GetByUser(int userid)
         {
-            return _db.QueryFirstOrDefault<Vault>($"SELECT * FROM vaults WHERE userid = {id}");
+            return _db.Query<Vault>($"SELECT * FROM vaults WHERE userid = {userid}");
         }
 
         public Vault Add(Vault vault)

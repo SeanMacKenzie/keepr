@@ -15,4 +15,4 @@
 -- DELETE FROM vaults WHERE id = 1
 -- DELETE FROM users WHERE id = 3
 
--- SELECT * FROM vaults WHERE userid = 4
+SELECT * FROM vaults WHERE userid = 4

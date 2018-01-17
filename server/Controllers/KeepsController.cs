@@ -28,6 +28,12 @@ namespace keepr.Controllers
         {
             return _db.GetById(id);
         }
+        // GET api/keeps/user/:userid
+        [HttpGet("user/{userid}")]
+        public IEnumerable<Keep> GetByUser(int userid)
+        {
+            return _db.GetByUser(userid);
+        }
 
         [HttpPost]
         public Keep Post([FromBody]Keep keep)

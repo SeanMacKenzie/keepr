@@ -120,6 +120,16 @@ var store = new vuex.Store({
                     commit('handleError', err)
                 })
         },
+        getUserKeeps({commit, dispatch}, userid) {
+            api('keeps/user/' + userid)
+                .then(res => {
+                    console.log("getUserKeeps", res.data)
+                    commit('setKeeps', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
         createKeep({ commit, dispatch }, newKeep) {
             api.post('keeps/', newKeep)
 
@@ -143,17 +153,17 @@ var store = new vuex.Store({
         },
 
         //Vault functions
-        getVaults({ commit, dispatch }) {
-            api('vaults')
+        getUserVaults({ commit, dispatch }, userid) {
+            api('vaults/' + userid)
                 .then(res => {
-                    console.log("getVaults", res.data)
+                    console.log("getUserVaults", res.data)
                     commit('setVaults', res.data)
                 })
                 .catch(err => {
                     commit('handleError', err)
                 })
         },
-        getVault({commit, dispatch}, id) {
+        getVault({ commit, dispatch }, id) {
             api('vaults/' + id)
                 .then(res => {
                     commit('setActiveKeep', res.data)
@@ -173,7 +183,7 @@ var store = new vuex.Store({
             $('#createVaultModal').modal('hide')
         },
         //this needs a check to make sure the creator is the only one who can delete
-        removeVault({commit, dispatch}, vault) {
+        removeVault({ commit, dispatch }, vault) {
             api.delete('vaults/' + vault.id)
                 .then(res => {
                     dispatch('getVaults')
@@ -182,11 +192,6 @@ var store = new vuex.Store({
                     commit('handleError', err)
                 })
         },
-
-        //Vaults functions
-        // getVaults({commit, dispatch}, payload) {
-        //     api('vaults/' + payload.)
-        // }
     }
 })
 
