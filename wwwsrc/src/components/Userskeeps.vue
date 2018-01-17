@@ -49,7 +49,7 @@
                 return this.$store.state.user
             },
             keeps() {
-                this.$store.state.keeps
+                return this.$store.state.keeps
             },
             activekeep() {
                 return this.$store.state.activekeep

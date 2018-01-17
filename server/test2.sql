@@ -1,5 +1,5 @@
--- ALTER TABLE keeps
--- ADD shares int(11)
+ALTER TABLE keeps
+ADD views int(11)
 
 -- SELECT * FROM vaults
 
@@ -15,4 +15,4 @@
 -- DELETE FROM vaults WHERE id = 1
 -- DELETE FROM users WHERE id = 3
 
-SELECT * FROM vaults WHERE userid = 4
+-- SELECT * FROM vaults WHERE userid = 4
