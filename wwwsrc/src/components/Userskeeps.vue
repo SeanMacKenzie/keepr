@@ -63,6 +63,18 @@
                 var keepId = activekeep.id
                 var userId = activekeep.userId
                 this.$store.dispatch('removeKeep', { keepId, userId })
+            },
+            makePublic(keep) {
+                var keepUpdate = {
+                    name: keep.name,
+                    description: keep.description,
+                    image: keep.image,
+                    shares: keep.shares,
+                    views: keep.views,
+                    public: true,
+                    userId: keep.userId
+                }
+                this.$store.dispatch('updateKeep', keepUpdate)
             }
         }
     }

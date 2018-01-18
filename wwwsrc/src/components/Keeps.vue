@@ -131,7 +131,8 @@
                     description: '',
                     image: '',
                     shares: '',
-                    view: '',
+                    views: '',
+                    public: '',
                     userId: ''
                 }
 
@@ -207,8 +208,9 @@
                 this.updateKeep.name = this.activekeep.name
                 this.updateKeep.description = this.activekeep.description
                 this.updateKeep.image = this.activekeep.image
-                this.updateKeep.shares = this.activekeep.shares++
+                this.updateKeep.shares = this.activekeep.shares + 1
                 this.updateKeep.views = this.activekeep.views
+                this.updateKeep.public = this.activekeep.public
                 this.updateKeep.userId = this.activekeep.userId
                 this.$store.dispatch('updateKeep', this.updateKeep)
                 this.updateKeep = {

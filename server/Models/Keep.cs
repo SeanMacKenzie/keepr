@@ -8,6 +8,7 @@ namespace keepr.Models
         public string Image { get; set; }
         public int Shares { get; set; }
         public int Views { get; set; }
+        public bool Public { get; set; }
         public int UserId { get; set; }
 
     }
