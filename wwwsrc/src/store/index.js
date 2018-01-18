@@ -194,9 +194,9 @@ var store = new vuex.Store({
 
         //Vault functions
         getUserVaults({ commit, dispatch }, userid) {
+
             api('vaults/user/' + userid)
                 .then(res => {
-                    // console.log("getUserVaults", res.data)
                     commit('setVaults', res.data)
                 })
                 .catch(err => {
@@ -243,7 +243,7 @@ var store = new vuex.Store({
             console.log(vaultId)
             api('vaultkeeps/vault/' + vaultId)
                 .then(res => {
-                    console.log("getVaultKeeps", res.data)
+                    console.log("getVaultKeeps", res)
                     commit('setVaultKeeps', res.data)
                 })
                 .catch(err => {

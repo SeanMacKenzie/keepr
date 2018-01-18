@@ -1,7 +1,7 @@
 <template>
     <div class="main container-fluid">
         <div class="row banner">
-            <div class="col-sm-3 product bottom-align-text">
+            <div class="col-sm-3 product">
                 <h4>keepr.</h4>
             </div>
             <div class="col-sm-6 text-center welcome" v-if="user.username != null">
@@ -152,14 +152,14 @@
 <style>
     .banner {
         background-color: black;
-        vertical-align: bottom;
-
+        
     }
+
+    
+
+
 
     #reg {
         display: none;
     }
-
-
-    
 </style>

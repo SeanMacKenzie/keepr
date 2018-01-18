@@ -21,7 +21,7 @@ namespace keepr.Repositories
 
         public IEnumerable<Vaultkeep> GetByVault(int vaultid)
         {
-            return _db.Query<Vaultkeep>($"SELECT * FROM vaultkeeps vk INNER JOIN keeps k ON k.id = vk.keepId WHERE vaultId = {vaultid}");
+            return _db.Query<Vaultkeep>($"SELECT * FROM vaultkeeps INNER JOIN keeps ON keeps.id = vaultkeeps.keepId WHERE vaultId = {vaultid}");
         }
 
         public Vaultkeep Add(Vaultkeep vaultkeep)

@@ -27,6 +27,14 @@
                 <button class="btn btn-lg btn-danger" @click="removeVault(activevault.id)">Delete this Vault</button>
             </div>
         </div>
+        <div class="vaultkeeps">
+            <h1>Vault keeps yo!</h1>
+            <div class="col-md-6 border" v-for="keep in vaultkeeps">
+                <h4>{{keep.name}}</h4>
+                <h6>{{keep.description}}</h6>
+                <img :src="keep.image" width="250" height="250">
+            </div>
+        </div>
     </div>
 
 </template>
