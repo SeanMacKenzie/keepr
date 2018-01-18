@@ -1,6 +1,8 @@
 -- ALTER TABLE keeps
--- ADD views INT(11) DEFAULT '0'
+-- ADD public enum('TRUE', 'FALSE') NOT NULL DEFAULT 'FALSE'
 
+-- ALTER TABLE keeps
+-- DROP COLUMN public
 -- SELECT * FROM vaults
 
 -- SELECT * FROM users

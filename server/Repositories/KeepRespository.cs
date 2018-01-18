@@ -16,7 +16,7 @@ namespace keepr.Repositories
 
         public IEnumerable<Keep> GetAll()
         {
-            return _db.Query<Keep>($"SELECT * FROM keeps WHERE public = true");
+            return _db.Query<Keep>($"SELECT * FROM keeps WHERE public = 'TRUE'");
         }
 
         public Keep GetById(int id)

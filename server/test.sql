@@ -57,6 +57,6 @@
 
 
 -- USE THIS LINE FOR GET KEEPS BY VAULTID
-SELECT * FROM vaultkeeps
-INNER JOIN keeps ON keeps.id = vaultkeeps.keepId 
-WHERE (vaultId = 6)
+-- SELECT * FROM vaultkeeps
+-- INNER JOIN keeps ON keeps.id = vaultkeeps.keepId 
+-- WHERE (vaultId = 6)

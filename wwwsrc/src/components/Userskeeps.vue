@@ -22,6 +22,10 @@
                     </div>
                     <div class="modal-body">
                         <img :src="activekeep.image" style="max-width: 100%">
+                        <div class="public" v-if="activekeep.public = 'false'">
+                            <button type="button" class="btn-default btn-lg btn-success makePublic" @click="makePublic(activekeep)">Make Keep Public</button>
+                        </div>
+
                     </div>
                     <div class="modal-footer text-center">
                         <button type="button" class="btn-default btn-lg btn-danger delete" @click="removeKeep(activekeep)">Delete Keep</button>
@@ -71,7 +75,7 @@
                     image: keep.image,
                     shares: keep.shares,
                     views: keep.views,
-                    public: true,
+                    public: 'TRUE',
                     userId: keep.userId
                 }
                 this.$store.dispatch('updateKeep', keepUpdate)
