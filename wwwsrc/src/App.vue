@@ -25,12 +25,19 @@
 </script>
 
 <style>
+  @import url('https://fonts.googleapis.com/css?family=Anton|Audiowide|Fjalla+One|Karla|Kavivanar|Source+Code+Pro');
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+
+    
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
-    /* margin-top: 60px; */
+    
+    
+    background-image: url("https://www.transparenttextures.com/patterns/dust.png");
+    background-color: #0f0003;
+    min-height: 100vh;
+    font-family: 'Karla', sans-serif;
+    color: #8d9229;
   }
 </style>

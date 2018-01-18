@@ -1,6 +1,6 @@
 <template>
     <div class="row created-keeps text-center">
-        <h1>User keeps yo!</h1>
+        <h1>Your Keeps</h1>
         <div class="col-12-sm" v-for="keep in keeps">
             <button class="keep-title" type="button" data-toggle="modal" @click="getKeep(keep.id)" data-target="#selectedKeep">
                 <h4>
@@ -82,5 +82,9 @@
     .delete {
         display: flex;
         justify-content: center;
+    }
+
+    .created-keeps {
+        color: white;
     }
 </style>

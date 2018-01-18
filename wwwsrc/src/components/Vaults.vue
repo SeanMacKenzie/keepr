@@ -1,9 +1,9 @@
 <template>
     <div class="row vaults text-center">
-        <h1>Vaults yo!</h1>
+        <h1>Your Vaults</h1>
         <div class="col-sm-6" v-for="vault in vaults">
             <router-link class="vault-title" :to="'Vaultkeeps'">
-                <h3><span @click="getVault(vault.id)">{{vault.name}}</span></h3>
+                <h3 class="custom"><span @click="getVault(vault.id)">{{vault.name}}</span></h3>
             </router-link>
             <p>{{vault.description}}</p>
         </div>
@@ -51,4 +51,11 @@
 
 
 <style>
+    .vaults {
+        color: white
+    }
+
+    .custom {
+        color: white;
+    }
 </style>

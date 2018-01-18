@@ -1,26 +1,44 @@
 <template>
     <div class="row keeps">
-        <h1>Keeps yo!</h1>
+        <div class="screentitle">
+            <h1>Available Keeps</h1>
+
+        </div>
         <div class="col-md-4 border" v-for="(keep, i) in keeps">
-            <div class="keepuser-view" v-if="user.username != null">
+            <div class="keepview">
 
-                <button class="keep-title" type="button" data-toggle="modal" @click="getKeep(keep.id); getUserVaults();" data-target="#selectedKeep">
-                    <h4>
-                        <b>{{keep.name}}</b>
-                    </h4>
-                </button>
-            </div>
-            <div class="keep-view" v-else>
-                <button class="keep-title" type="button" data-toggle="modal" data-target="#loginKeepModal">
-                    <h4>
-                        <b>{{keep.name}}</b>
-                    </h4>
-                </button>
+                <div class="keepuser-view" v-if="user.username != null">
 
+                    <button class="keep-title" type="button" data-toggle="modal" @click="getKeep(keep.id); getUserVaults();" data-target="#selectedKeep">
+                        <h4>
+                            <b>{{keep.name}}</b>
+                        </h4>
+                    </button>
+                </div>
+                <div class="keep-view" v-else>
+                    <button class="keep-title" type="button" data-toggle="modal" data-target="#loginKeepModal">
+                        <h4>
+                            <b>{{keep.name}}</b>
+                        </h4>
+                    </button>
+
+                </div>
+                <h5>
+                    <b>{{keep.description}}</b>
+                </h5>
+                <div class="on-hover-things">
+                    <img :src="keep.image" width="150" height="150" class="keepimage">
+                    <div class="middle">
+                        <div class="buttonstuff">
+                            <button class="btn btn-success btn-md">Share</button>
+                            <button class="btn btn-primary btn-md" type="button" data-toggle="modal" @click="getKeep(keep.id); getUserVaults();" data-target="#selectedKeep">View</button>
+                            <button class="btn btn-danger btn-md" type="button" data-toggle="modal" @click="getKeep(keep.id); getUserVaults();" data-target="#selectedKeep">Keep in vault</button>
+                        </div>
+                    </div>
+
+                </div>
+                <h5>Has been in {{keep.shares}} vaults</h5>
             </div>
-            <h6>{{keep.description}}</h6>
-            <img :src="keep.image" width="150" height="150">
-            <h6>Has been in {{keep.shares}} vaults</h6>
         </div>
         <div class="modal fade" id="loginKeepModal" tabindex="-1" role="dialog" aria-labelledby="loginKeepModalLabel">
             <div class="modal-dialog">
@@ -195,7 +213,7 @@
             incrementShares(activekeep) {
                 activekeep.shares++
                 this.$store.dispatch('updateKeep', activekeep)
-                
+
 
             }
         }
@@ -206,5 +224,37 @@
 <style>
     #regkeep {
         display: none;
+    }
+
+    .keepimage {
+        opacity: 1;
+        backface-visibility: hidden;
+        transition: .5s ease;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        text-align: center;
+    }
+
+    .on-hover-things:hover .keepimage {
+        opacity: 0.3;
+    }
+
+    .on-hover-things:hover .middle {
+        opacity: 1;
+    }
+
+    .keepview {
+        background-color: rgb(218, 216, 216);
+        border-width: 5px;
+        border-color: black;
+        color: black;
+
+    }
+
+    .form {
+        font-family: 'Karla', sans-serif;
     }
 </style>

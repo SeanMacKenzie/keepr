@@ -47,12 +47,12 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h2 class="modal-title" id="keepModal">{{activevaultkeep.name}}</h2>
-                        <h6 class="modal-description">{{activevaultkeep.description}}</h6>
+                        <h2 class="modal-title" id="keepModal">{{activekeep.name}}</h2>
+                        <h6 class="modal-description">{{activekeep.description}}</h6>
                     </div>
                     <div class="modal-body">
-                        <img :src="activevaultkeep.image" style="max-width: 100%">
-                        <button type="button" class="btn-default btn-lg btn-success removefromvault" @click="removeFromVault(activevaultkeep)">Remove from Vault</button>
+                        <img :src="activekeep.image" style="max-width: 100%">
+                        
                     </div>
                     <div class="modal-footer">
                         <h5>This is where we add to vault or share of something like that</h5>
@@ -80,7 +80,7 @@
                 this.$store.dispatch('removeVault', this.activevault.id)
             },
             getKeep(id) {
-                this.$store.dispatch('getVaultKeep', id)
+                this.$store.dispatch('getKeep', id)
             },
             removeFromVault(activevaultkeep) {
                 this.store.dispatch('removeVaultKeep', activevaultkeep.id)
@@ -98,6 +98,9 @@
             },
             activevaultkeep() {
                 return this.$store.state.activevaultkeep
+            },
+            activekeep() {
+                return this.$store.state.activekeep
             }
 
         },

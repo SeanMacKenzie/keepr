@@ -11,7 +11,7 @@
             <div class="col-sm-6 text-center welcome" v-else>
                 <h2>Welcome to keepr.</h2>
             </div>
-            <div class="col-sm-3 login bottom-align-text" id="login" v-if="user.username == null">
+            <div class="col-sm-3 login bottom-align-text loginbutton" id="login" v-if="user.username == null">
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">Login</button>
                 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
                     <div class="modal-dialog">
@@ -150,12 +150,34 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+    @import url('https://fonts.googleapis.com/css?family=Audiowide|Kavivanar|Source+Code+Pro');
     .banner {
         background-color: black;
-        
     }
 
-    
+    .product {
+        font-family: 'Audiowide', cursive;
+        padding-top: 3em;
+        color: #8d9229;
+    }
+
+    .welcome {
+        font-family: 'Audiowide', cursive;
+        padding-top: 1em;
+        color: #8d9229;
+    }
+
+    .loginbutton {
+        padding-top: 1em;
+        color: #8d9229;
+        font-family: 'Audiowide', cursive;
+    }
+
+    .logout {
+        padding-top: 1em;
+        font-family: 'Audiowide', cursive;
+        color: #8d9229;
+    }
 
 
 

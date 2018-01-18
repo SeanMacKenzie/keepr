@@ -16,7 +16,7 @@
         </div>
         <div class="row navigation">
             <div class="col-md-4 add-vault text-center">
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createVaultModal">Create a new Vault</button>
+                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#createVaultModal">Create a new Vault</button>
                 <div class="modal fade" id="createVaultModal" tabindex="-1" role="dialog" aria-labelledby="createVaultModalLabel">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -57,7 +57,7 @@
             </div>
 
             <div class="col-md-4 add-keep text-center">
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createKeepModal">Create a new Keep</button>
+                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#createKeepModal">Create a new Keep</button>
                 <div class="modal fade" id="createKeepModal" tabindex="-1" role="dialog" aria-labelledby="createKeepModalLabel">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -172,4 +172,7 @@
 </script>
 
 <style>
+    .intro {
+        color: white;
+    }
 </style>

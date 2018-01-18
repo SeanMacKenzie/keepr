@@ -179,7 +179,7 @@ var store = new vuex.Store({
                 .then(res => {
                     console.log("update", res.data)
                     commit('setActiveKeep', res.data)
-                    dispatch('getKeeps')
+                    dispatch('getUserKeeps', updateKeep.userId)
                 })
                 .catch(err => {
                     commit('handleError', err)
