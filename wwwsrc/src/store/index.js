@@ -65,7 +65,7 @@ var store = new vuex.Store({
             auth('account/authenticate', )
                 .then(res => {
 
-                    console.log("Itdo auth", res.data)
+                    // console.log("Itdo auth", res.data)
                     commit('setUser', res.data)
                     router.push({ name: 'Main' })
                 })
@@ -76,7 +76,7 @@ var store = new vuex.Store({
         submitLogin({ commit, dispatch }, user) {
             auth.post('account/login', user)
                 .then(res => {
-                    console.log("Itdo login", res.data)
+                    // console.log("Itdo login", res.data)
                     commit('setUser', res.data)
                     router.push({ name: 'Main' })
                 })
@@ -88,7 +88,7 @@ var store = new vuex.Store({
         submitKeepLogin({ commit, dispatch }, user) {
             auth.post('account/login', user)
                 .then(res => {
-                    console.log("Itdo login", res.data)
+                    // console.log("Itdo login", res.data)
                     commit('setUser', res.data)
                     router.push({ name: 'Main' })
                 })
@@ -144,7 +144,7 @@ var store = new vuex.Store({
         getKeep({ commit, dispatch }, id) {
             api('keeps/' + id)
                 .then(res => {
-                    console.log("getKeep", res.data)
+                    // console.log("getKeep", res.data)
                     commit('setActiveKeep', res.data)
                 })
                 .catch(err => {
@@ -162,7 +162,7 @@ var store = new vuex.Store({
                 })
         },
         createKeep({ commit, dispatch }, newKeep) {
-            console.log(newKeep)
+            // console.log(newKeep)
             api.post('keeps/', newKeep)
                 .then(res => {
                     dispatch('getUserKeeps', newKeep.userId)
@@ -177,7 +177,7 @@ var store = new vuex.Store({
             console.log(updateKeep)
             api.put('keeps/' + updateKeep.id, updateKeep)
                 .then(res => {
-                    console.log("update", res.data)
+                    // console.log("update", res.data)
                     commit('setActiveKeep', res.data)
                     dispatch('getUserKeeps', updateKeep.userId)
                 })
@@ -213,7 +213,7 @@ var store = new vuex.Store({
         getVault({ commit, dispatch }, id) {
             api('vaults/' + id)
                 .then(res => {
-                    console.log("getVault", res.data)
+                    // console.log("getVault", res.data)
                     commit('setActiveVault', res.data)
                     dispatch('getVaultKeeps', id)
 
@@ -234,7 +234,7 @@ var store = new vuex.Store({
         },
         //this needs a check to make sure the creator is the only one who can delete
         removeVault({ commit, dispatch }, vaultId) {
-            console.log(vaultId)
+            // console.log(vaultId)
             api.delete('vaults/' + vaultId)
                 .then(res => {
                     // commit('getVaults')
@@ -247,10 +247,10 @@ var store = new vuex.Store({
 
         //Vaultkeeps
         getVaultKeeps({ commit, dispatch }, vaultId) {
-            console.log(vaultId)
+            // console.log(vaultId)
             api('vaultkeeps/vault/' + vaultId)
                 .then(res => {
-                    console.log("getVaultKeeps", res)
+                    // console.log("getVaultKeeps", res)
                     commit('setVaultKeeps', res.data)
                 })
                 .catch(err => {
@@ -258,10 +258,10 @@ var store = new vuex.Store({
                 })
         },
         getVaultKeep({ commit, dispatch }, id) {
-            console.log(id)
+            // console.log(id)
             api('vaultkeeps/' + id)
                 .then(res => {
-                    console.log("vaultkeep", res)
+                    // console.log("vaultkeep", res)
                     commit('setActiveVaultKeep', res.data)
                 })
                 .catch(err => {
@@ -271,7 +271,7 @@ var store = new vuex.Store({
         addVaultKeep({ commit, dispatch }, vaultKeep) {
             api.post('vaultkeeps/', vaultKeep)
                 .then(res => {
-                    console.log("addVaultKeeps", res.data)
+                    // console.log("addVaultKeeps", res.data)
                     commit('setVaultKeeps', res.data)
                     dispatch('getKeeps')
                 })

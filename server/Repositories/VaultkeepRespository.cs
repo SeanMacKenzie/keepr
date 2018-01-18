@@ -14,11 +14,6 @@ namespace keepr.Repositories
         {
         }
 
-        // public IEnumerable<Vaultkeep> Getall()
-        // {
-        //     return _db.Query<Vaultkeep>($"SELECT * FROM vaultkeeps");
-        // }
-
         public IEnumerable<Vaultkeep> GetByVault(int vaultid)
         {
             return _db.Query<Vaultkeep>($"SELECT * FROM vaultkeeps INNER JOIN keeps ON keeps.id = vaultkeeps.keepId WHERE vaultId = {vaultid}");

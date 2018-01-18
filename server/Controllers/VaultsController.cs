@@ -17,11 +17,6 @@ namespace keepr.Controllers
             _db = vaultrepo;
         }
 
-        // [HttpGet]
-        // public IEnumerable<Vault> Get()
-        // {
-        //     return _db.GetAll();
-        // }
 
         [HttpGet("{id}")]
         public Vault Get(int id)
