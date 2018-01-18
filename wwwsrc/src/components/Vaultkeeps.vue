@@ -30,14 +30,18 @@
         <div class="vaultkeeps">
             <h1>Vault keeps yo!</h1>
             <div class="col-md-6 border" v-for="keep in vaultkeeps">
-                <button class="keep-title" type="button" data-toggle="modal" @click="getKeep(keep.id)" data-target="#selectedKeep">
-                    <h4>
-                        <b>{{keep.name}}</b>
-                    </h4>
+                <div class="keepview">
 
-                </button>
-                <h6>{{keep.description}}</h6>
-                <img :src="keep.image" width="250" height="250">
+                    <button class="keep-title" type="button" data-toggle="modal" @click="getKeep(keep.id)" data-target="#selectedKeep">
+                        <h4>
+                            <b>{{keep.name}}</b>
+                        </h4>
+
+                    </button>
+                    <h6>{{keep.description}}</h6>
+                    <img :src="keep.image" width="250" height="250">
+                </div>
+                <div class="empty"></div>
             </div>
         </div>
         <div class="modal fade" id="selectedKeep" tabindex="-1" role="dialog" aria-labelledby="selectedKeepLabel">
@@ -52,7 +56,7 @@
                     </div>
                     <div class="modal-body">
                         <img :src="activekeep.image" style="max-width: 100%">
-                        
+
                     </div>
                     <div class="modal-footer">
                         <h5>This is where we add to vault or share of something like that</h5>
@@ -112,4 +116,13 @@
 </script>
 
 <style>
+    .vaultkeeps {
+        color: white;
+    }
+    .empty {
+        padding: 2%;
+    }
+    .modal-header {
+        color: black;
+    }
 </style>

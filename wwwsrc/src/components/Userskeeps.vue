@@ -2,13 +2,17 @@
     <div class="row created-keeps text-center">
         <h1>Your Keeps</h1>
         <div class="col-12-sm" v-for="keep in keeps">
-            <button class="keep-title" type="button" data-toggle="modal" @click="getKeep(keep.id)" data-target="#selectedKeep">
-                <h4>
-                    <b>{{keep.name}}</b>
-                </h4>
-            </button>
-            <h6>{{keep.description}}</h6>
-            <img :src="keep.image" width="150" height="150">
+            <div class="keepview">
+
+                <button class="keep-title" type="button" data-toggle="modal" @click="getKeep(keep.id)" data-target="#selectedKeep">
+                    <h4>
+                        <b>{{keep.name}}</b>
+                    </h4>
+                </button>
+                <h6>{{keep.description}}</h6>
+                <img :src="keep.image" width="150" height="150">
+            </div>
+            <div class="empty"></div>
         </div>
         <div class="modal fade" id="selectedKeep" tabindex="-1" role="dialog" aria-labelledby="selectedKeepLabel">
             <div class="modal-dialog">
@@ -69,7 +73,7 @@
                 this.$store.dispatch('removeKeep', { keepId, userId })
             },
             makePublic(keep) {
-               
+
                 keep.public = 'TRUE'
                 this.$store.dispatch('updateKeep', keep)
             }
@@ -78,7 +82,7 @@
 
 </script>
 
-<style>
+<style scoped>
     .delete {
         display: flex;
         justify-content: center;
@@ -86,5 +90,20 @@
 
     .created-keeps {
         color: white;
+    }
+
+    .keepview {
+        background-color: rgb(218, 216, 216);
+        border-width: 5px;
+        border-color: black;
+        color: black;
+        padding-bottom: 1em;
+        padding-top: 1em;
+    }
+    .empty {
+        padding: 2%;
+    }
+    .modal-header {
+        color: black;
     }
 </style>

@@ -273,6 +273,7 @@ var store = new vuex.Store({
                 .then(res => {
                     console.log("addVaultKeeps", res.data)
                     commit('setVaultKeeps', res.data)
+                    dispatch('getKeeps')
                 })
                 .catch(err => {
                     commit('handleError', err)

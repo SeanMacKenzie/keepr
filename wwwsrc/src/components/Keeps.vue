@@ -257,4 +257,7 @@
     .form {
         font-family: 'Karla', sans-serif;
     }
+    .screentitle {
+        color: white
+    }
 </style>
