@@ -30,9 +30,34 @@
         <div class="vaultkeeps">
             <h1>Vault keeps yo!</h1>
             <div class="col-md-6 border" v-for="keep in vaultkeeps">
-                <h4>{{keep.name}}</h4>
+                <button class="keep-title" type="button" data-toggle="modal" @click="getKeep(keep.id)" data-target="#selectedKeep">
+                    <h4>
+                        <b>{{keep.name}}</b>
+                    </h4>
+
+                </button>
                 <h6>{{keep.description}}</h6>
                 <img :src="keep.image" width="250" height="250">
+            </div>
+        </div>
+        <div class="modal fade" id="selectedKeep" tabindex="-1" role="dialog" aria-labelledby="selectedKeepLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h2 class="modal-title" id="keepModal">{{activevaultkeep.name}}</h2>
+                        <h6 class="modal-description">{{activevaultkeep.description}}</h6>
+                    </div>
+                    <div class="modal-body">
+                        <img :src="activevaultkeep.image" style="max-width: 100%">
+                        <button type="button" class="btn-default btn-lg btn-success removefromvault" @click="removeFromVault(activevaultkeep)">Remove from Vault</button>
+                    </div>
+                    <div class="modal-footer">
+                        <h5>This is where we add to vault or share of something like that</h5>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -52,8 +77,13 @@
                 this.$store.dispatch('logout')
             },
             removeVault() {
-                // var vaultId = this.activevault.id
                 this.$store.dispatch('removeVault', this.activevault.id)
+            },
+            getKeep(id) {
+                this.$store.dispatch('getVaultKeep', id)
+            },
+            removeFromVault(activevaultkeep) {
+                this.store.dispatch('removeVaultKeep', activevaultkeep.id)
             }
         },
         computed: {
@@ -65,7 +95,11 @@
             },
             vaultkeeps() {
                 return this.$store.state.vaultkeeps
+            },
+            activevaultkeep() {
+                return this.$store.state.activevaultkeep
             }
+
         },
         mounted() {
 

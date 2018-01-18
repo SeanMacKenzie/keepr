@@ -27,7 +27,8 @@ var store = new vuex.Store({
         activekeep: {},
         vaults: [],
         activevault: {},
-        vaultkeeps: []
+        vaultkeeps: [],
+        activevaultkeep: {}
 
     },
     mutations: {
@@ -51,6 +52,9 @@ var store = new vuex.Store({
         },
         setVaultKeeps(state, data) {
             state.vaultkeeps = data
+        },
+        setActiveVaultKeep(state, data) {
+            state.activevaultkeep = data
         }
 
 
@@ -173,11 +177,14 @@ var store = new vuex.Store({
             console.log(updateKeep)
             api.put('keeps/' + updateKeep.id, updateKeep)
                 .then(res => {
+                    console.log("update", res.data)
                     commit('setActiveKeep', res.data)
+                    dispatch('getKeeps')
                 })
                 .catch(err => {
                     commit('handleError', err)
                 })
+            $('#selectedKeep').modal('hide')
         },
         //this needs a check to make sure the creator is the only one who can delete
         removeKeep({ commit, dispatch }, payload) {
@@ -245,6 +252,17 @@ var store = new vuex.Store({
                 .then(res => {
                     console.log("getVaultKeeps", res)
                     commit('setVaultKeeps', res.data)
+                })
+                .catch(err => {
+                    commit('handleError', err)
+                })
+        },
+        getVaultKeep({ commit, dispatch }, id) {
+            console.log(id)
+            api('vaultkeeps/' + id)
+                .then(res => {
+                    console.log("vaultkeep", res)
+                    commit('setActiveVaultKeep', res.data)
                 })
                 .catch(err => {
                     commit('handleError', err)

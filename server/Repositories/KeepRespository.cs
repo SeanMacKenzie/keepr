@@ -56,6 +56,7 @@ namespace keepr.Repositories
                     Image = @Image,
                     Shares = @Shares,
                     Views = @Views,
+                    Public = @Public,
                     UserId = @UserId
                 WHERE Id = {id};
                 SELECT * FROM keeps WHERE id = {id};", keep);
