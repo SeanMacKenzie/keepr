@@ -4,7 +4,7 @@ import vuex from 'vuex'
 import router from '../router'
 
 var production = !window.location.host.includes('localhost');
-var baseUrl = production ? '//' : '//localhost:5000';
+var baseUrl = production ? '/' : '//localhost:5000';
 
 let api = axios.create({
     baseURL: baseUrl + '/api/',
